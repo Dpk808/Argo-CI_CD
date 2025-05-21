@@ -154,6 +154,28 @@ We can see 3 pods running, confirming auto-sync works.
 
 ---
 
+
+## And also testing Github actions on that repo:
+
+Editing the deployment.yaml and increasing the replicas to 5. 
+
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/4.1%20Testing%20Github%20Actions.png)
+
+Verifying the actions in the repo: 
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/4.2%20Actions%20triggered%20successfully.png)
+
+
+
+Verifying in the Argo CD UI as well: 
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/4.3%20Five%20pods%20were%20created%20instantly.png)
+
+
+
+
+
 ## 🛠️ Tools Used
 
 - Kubernetes
