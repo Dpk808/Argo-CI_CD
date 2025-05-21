@@ -96,7 +96,7 @@ After creation:
 kubectl port-forward svc/upload-server 8001:80
 ```
 
-Open [http://localhost:5000](http://localhost:8001) to check if the app is working. 
+Open [http://localhost:8001](http://localhost:8001) to check if the app is working. 
 
 
 ![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.6%20App%20Synced.png) 
