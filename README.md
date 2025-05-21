@@ -66,21 +66,47 @@ Use these credentials to log into the UI.
 - **Cluster URL:** https://kubernetes.default.svc
 - **Namespace:** default (or your custom namespace)
 
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.2%20Creating%20Argo%20App%20from%20repo.png) 
+
+
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.3%20Argo%20App%202.png)
+
+
 Click **Create**.
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.4%20App%20created.png)
+
 
 ### 2. Sync the Application
 
 After creation:
 
 - Click **Sync**
+
+  
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.6%20App%20Synced.png) 
+
+
+
 - The app will deploy
 - You can port-forward the app service and verify it in the browser
 
 ```bash
-kubectl port-forward svc/upload-server 5000:5000
+kubectl port-forward svc/upload-server 8001:80
 ```
 
-Open [http://localhost:5000](http://localhost:5000) to check if the app is working.
+Open [http://localhost:5000](http://localhost:8001) to check if the app is working. 
+
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.6%20App%20Synced.png) 
+
+
+And the app is working!
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.75%20uploadserver%20is%20working.png) 
+
+
 
 ---
 
@@ -92,13 +118,26 @@ For production best practices:
 - Enable **Prune** (remove deleted resources)
 - Enable **Self-Heal** (restore drifted resources)
 
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/2.8%20Auto%20Sync%2C%20prune%20and%20self-heal.png)
+
+
 ---
 
 ## ✅ Testing Auto-Sync
 
-1. Change your deployment manifest (e.g., replicas: `1` → `3`)
+1. Changing the deployment manifest (e.g., replicas: `1` → `3`)
 2. Commit and push to GitHub
 3. Argo CD will auto-sync and apply the changes
+
+
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/3.%20Test%20auto-sync%20by%20changing%20replicas%20form%201%20to%203.png) 
+
+And pushing it to the github repo: 
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/3.2%20After%20pushing%20the%20edited%20deployment%20yaml%20.png)
+
+
 
 Verify:
 
@@ -106,7 +145,12 @@ Verify:
 kubectl get pods
 ```
 
-You should see 3 pods running, confirming auto-sync works.
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/3.3%20Three%20pods%20are%20created%20instantly.png) 
+
+
+
+We can see 3 pods running, confirming auto-sync works.
 
 ---
 
@@ -120,6 +164,3 @@ You should see 3 pods running, confirming auto-sync works.
 
 ---
 
-## 📃 License
-
-MIT License. See `LICENSE` file for details.
