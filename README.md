@@ -1,95 +1,125 @@
-# Argo CI CD
+# 🚀 Argo CD CI/CD Setup with upload-server App
 
+This project demonstrates setting up **Argo CD** on macOS and deploying a sample Flask app (`upload-server`) from a GitHub repository using GitOps principles, including **Auto-Sync**, **Prune**, and **Self-Heal** features.
 
-## Installation:
+---
 
+## 📦 Step-by-Step Installation
+
+### 1. Install Argo CD CLI
+
+```bash
 brew install argocd
+```
 
+### 2. Install Argo CD in Kubernetes
+
+```bash
 kubectl create namespace argocd
 
 kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
 
-kubectl get svc
+### 3. Access the Argo CD UI
 
+```bash
 kubectl port-forward -n argocd svc/argocd-server 8080:443
+```
 
+Then open your browser and go to:
 
-## when logging in to Argo CD:
+```
+https://localhost:8080
+```
 
-username is admin and password is created in a secret file “argocd-initial-admin-secret”
+---
 
+## 🔐 Argo CD Login
 
-## To get the password:
+- **Username:** `admin`
+- **Password:** Extracted from the Kubernetes secret
 
-kubectl get secret argocd-initial-admin-secret -n argocd -o yaml
+Get the password:
 
-in my case: dWFFSkRwTFJwUDlTYTVraw==
+```bash
+kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 --decode
+```
 
+Example output:
 
+```
+uaEJDpLRpP9Sa5kk
+```
 
-We need to decode that password:
+Use these credentials to log into the UI.
 
-echo dWFFSkRwTFJwUDlTYTVraw== | base64 --decode
+---
 
-which is : uaEJDpLRpP9Sa5kk
+## 📁 Deploying the App from GitHub
 
+### 1. Create a New Application in Argo CD UI
 
+- **Application Name:** upload-server
+- **Project:** default
+- **Repository URL:** _your GitHub repo URL_
+- **Path:** _path to your k8s manifests (e.g. `k8s/`)_
+- **Cluster URL:** https://kubernetes.default.svc
+- **Namespace:** default (or your custom namespace)
 
-The ArgoCD is empty right now:
+Click **Create**.
 
+### 2. Sync the Application
 
-2.Creating an app on Argo CD from github repo:
+After creation:
 
+- Click **Sync**
+- The app will deploy
+- You can port-forward the app service and verify it in the browser
 
+```bash
+kubectl port-forward svc/upload-server 5000:5000
+```
 
+Open [http://localhost:5000](http://localhost:5000) to check if the app is working.
 
-And the app has ben created:
+---
 
+## ♻️ Enable Auto-Sync, Prune & Self-Heal
 
+For production best practices:
 
-We then select the sync function in the app:
+- Enable **Auto-Sync** (auto-deploy on Git change)
+- Enable **Prune** (remove deleted resources)
+- Enable **Self-Heal** (restore drifted resources)
 
+---
 
+## ✅ Testing Auto-Sync
 
+1. Change your deployment manifest (e.g., replicas: `1` → `3`)
+2. Commit and push to GitHub
+3. Argo CD will auto-sync and apply the changes
 
-And its synced:
+Verify:
 
+```bash
+kubectl get pods
+```
 
+You should see 3 pods running, confirming auto-sync works.
 
+---
 
+## 🛠️ Tools Used
 
+- Kubernetes
+- Argo CD
+- Flask (upload-server)
+- GitHub
+- GitOps Workflow
 
-Then port forwarding the service:
+---
 
-To check if it is working:
+## 📃 License
 
-
-
-
-
-
-And the upload-server app is working:
-
-
-Also enabling auto sync, prune and auto-heal for best practice.
-
-
-
-
-Now testing the Auto-Sync by changing the number of replicas from 1 to 3:
-
-
-
-And pushing this changed code to the github:
-
-
-
-
-Verifying:
-
-
-
-
-
-
-And three pods are created instantly showing auto-sync is working.
+MIT License. See `LICENSE` file for details.
