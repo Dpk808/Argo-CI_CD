@@ -162,6 +162,18 @@ Editing the deployment.yaml and increasing the replicas to 5.
 
 ![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/4.1%20Testing%20Github%20Actions.png)
 
+
+Configuring the Repo:Actions for write access:
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/5.1%20Configure%20repo%20for%20write%20access.png)
+
+
+And Selecting these two:
+
+
+![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/5.2%20Configure%20Actions.png)
+
+
 Verifying the actions in the repo: 
 
 ![image alt](https://github.com/Dpk808/Argo-CI_CD/blob/main/Screenshots/4.2%20Actions%20triggered%20successfully.png)
