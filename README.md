@@ -1,4 +1,6 @@
-# 🚀 Argo CD CI/CD Setup with upload-server App
+# 🚀 Argo CD CI/CD Setup with upload-server App 
+
+## Connected with the App-ArgoCD repo
 
 This project demonstrates setting up **Argo CD** on macOS and deploying a sample Flask app (`upload-server`) from a GitHub repository using GitOps principles, including **Auto-Sync**, **Prune**, and **Self-Heal** features.
 
